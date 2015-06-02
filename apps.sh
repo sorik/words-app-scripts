@@ -21,7 +21,7 @@ then
 fi
 
 # stop and remove the existing news server
-NEWS_SERVER_ID=$(docker ps | grep $NEWS_SERVER | awk '{print $1}')
+NEWS_SERVER_ID=$(docker ps -a | grep $NEWS_SERVER | awk '{print $1}')
 if [ "$NEWS_SERVER_ID" != "" ]
 then
   echo "stoping and removing running news server.."
