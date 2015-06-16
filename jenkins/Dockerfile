@@ -3,6 +3,7 @@ FROM jenkins
 USER root
 RUN apt-get update && apt-get install bzip2
 
+# install docker
 RUN bash -c "if ! [ -e /usr/lib/apt/methods/https ]; then apt-get update && apt-get install -y apt-transport-https; fi"
 
 RUN \
@@ -23,5 +24,14 @@ RUN gpasswd -a jenkins docker
 
 USER jenkins
 
+# install leiningen
+RUN echo $PATH
+RUN \
+    cd /usr/bin && \
+    # sudo wget http://github.com/technomancy/leiningen/raw/master/bin/lein && \
+    sudo wget https://raw.githubusercontent.com/technomancy/leiningen/stable/bin/lein && \
+    sudo chmod +x lein
+
+RUN lein self-install
 
 
