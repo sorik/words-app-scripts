@@ -22,6 +22,15 @@ RUN echo "jenkins   ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 
 RUN gpasswd -a jenkins docker
 
+# install aws cli
+RUN \
+    apt-get install -y groff less python && \
+    python --version && \
+    curl "https://s3.amazonaws.com/aws-cli/awscli-bundle.zip" -o "awscli-bundle.zip" && \
+    unzip awscli-bundle.zip && \
+    sudo ./awscli-bundle/install -i /usr/local/aws -b /usr/local/bin/aws
+
+
 USER jenkins
 
 # install leiningen
